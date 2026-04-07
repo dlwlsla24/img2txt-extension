@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "쇼핑몰 상세 이미지 텍스트 추출기",
+  "version": "1.1.0",
+  "description": "올리브영 등 쇼핑몰 상품 상세 페이지의 이미지에서 텍스트를 자동 추출합니다.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; connect-src 'self' https://tessdata.projectnaptha.com https://cdn.jsdelivr.net https://*.oliveyoung.co.kr https://*.coupang.com https://*.11st.co.kr https://*.gmarket.co.kr https://*.auction.co.kr https://*.ssg.com https://*.kurly.com https://*.musinsa.com https://*;"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.oliveyoung.co.kr/*",
+        "https://*.coupang.com/*",
+        "https://*.11st.co.kr/*",
+        "https://*.gmarket.co.kr/*",
+        "https://*.auction.co.kr/*",
+        "https://*.ssg.com/*",
+        "https://*.kurly.com/*",
+        "https://*.musinsa.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["libs/*", "tessdata/*", "result.html", "result.js", "result.css"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
